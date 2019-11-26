@@ -1,8 +1,10 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
+import java.io.IOException;
+
 public interface GameManager {
 
-    void loadTiles();
+    GameManager loadTiles() throws IOException;
 
     GameMap createMap();
 }

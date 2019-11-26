@@ -2,7 +2,7 @@ package com.agawrysiuk.huntbeginsspringboot.model;
 
 public interface ExitAvP {
 
-    boolean isClosed();
-
+    void setConnected(boolean connected);
+    boolean isOpen();
     boolean isConnected();
 }
