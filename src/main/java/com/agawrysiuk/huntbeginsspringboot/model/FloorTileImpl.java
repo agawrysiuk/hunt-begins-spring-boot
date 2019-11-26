@@ -1,5 +1,6 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -7,50 +8,39 @@ import java.util.Arrays;
 @Slf4j
 public class FloorTileImpl implements FloorTile {
 
-    private boolean unique;
-    private ExitAvP[] exits;
-    private String name;
+    @Getter
+    private final int id;
+    @Getter
+    private final String name;
+    @Getter
+    private int[] exits;
+    @Getter
+    private double rotate;
 
-    public FloorTileImpl(String name) {
+    public FloorTileImpl(int id, String name) {
+        this.id = id;
         this.name = name;
-        this.unique = !name.toLowerCase().contains("regular");
-        this.exits = new ExitAvP[4];
+        this.rotate = 0;
+        this.exits = new int[4];
     }
 
     @Override
-    public boolean isUnique() {
-        return unique;
-    }
-
-    @Override
-    public void setExits(boolean... exitsToSet) {
+    public void setExits(int... exitsToSet) {
         if (exitsToSet.length != 4) {
             log.info("Incorrect number of exits: {}", exitsToSet);
             return;
         }
-        for (int i = 0; i < exitsToSet.length; i++) {
-            exits[i] = new ExitAvpImpl(exitsToSet[i]);
-        }
-    }
-
-    @Override
-    public ExitAvP[] getExits() {
-        return exits;
-    }
-
-    @Override
-    public String getName() {
-        return name;
     }
 
     @Override
     public void rotate() {
         log.info("Before rotation = {}", Arrays.toString(exits));
-        ExitAvP temp = exits[3];
+        int temp = exits[3];
         for (int i = 0; i < 3; i++) {
             exits[i + 1] = exits[i];
         }
         exits[0] = temp;
         log.info("After rotation = {}", Arrays.toString(exits));
+        rotate = (rotate + 90) % 360;
     }
 }

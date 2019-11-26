@@ -1,4 +1,4 @@
-package com.agawrysiuk.huntbeginsspringboot.config;
+package com.agawrysiuk.huntbeginsspringboot.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
