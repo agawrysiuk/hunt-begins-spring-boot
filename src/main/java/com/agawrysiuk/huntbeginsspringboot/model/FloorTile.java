@@ -6,9 +6,9 @@ public interface FloorTile {
 
     void setExits(int... exits);
 
-    void setOneExit(int position, int exit);
+    void setOneExit(int position);
 
-    int[] getExits();
+    Exit[] getExits();
 
     String getName();
 

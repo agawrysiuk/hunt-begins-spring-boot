@@ -18,7 +18,6 @@ public class GameManagerImpl implements GameManager {
 
     public GameManagerImpl() {
         this.tiles = new HashMap<>();
-        this.gameMap = new GameMapImpl();
     }
 
     /*    14x Straight Corridors    id 1-14
@@ -49,6 +48,7 @@ public class GameManagerImpl implements GameManager {
 
     @Override
     public GameMap createMap() {
+        this.gameMap = new GameMapImpl();
         //1. check if it's empty
         //  - yes -> put first tile, a Dead End or a Special tile, loop;
         //  - no -> move to point 2;
@@ -57,7 +57,7 @@ public class GameManagerImpl implements GameManager {
         //  - no -> go to point 3
         //3. try to add a tile
         while(!gameMap.isFinished()) {
-            if(gameMap.getGameTiles().isEmpty()) { //we need to choose a starting tile if it's an empty map
+            if(gameMap.getFillerList().isEmpty()) { //we need to choose a starting tile if it's an empty map
                 FloorTile firstTile = tiles.get(55 + new Random().nextInt(5));
                 gameMap.addFloorTile(firstTile);
                 tiles.remove(firstTile.getId());

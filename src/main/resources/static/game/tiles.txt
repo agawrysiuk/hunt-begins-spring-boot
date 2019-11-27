@@ -1,45 +1,45 @@
-1,Straight Corridor,-1,0,1,0
-2,Straight Corridor,-1,0,1,0
-3,Straight Corridor,-1,0,1,0
-4,Straight Corridor,-1,0,1,0
-5,Straight Corridor,-1,0,1,0
-6,Straight Corridor,-1,0,1,0
-7,Straight Corridor,-1,0,1,0
-8,Straight Corridor,-1,0,1,0
-9,Straight Corridor,-1,0,1,0
-10,Straight Corridor,-1,0,1,0
-11,Straight Corridor,-1,0,1,0
-12,Straight Corridor,-1,0,1,0
-13,Straight Corridor,-1,0,1,0
-14,Straight Corridor,-1,0,1,0
-15,L-Shape Tile,-1,1,0,0
-16,L-Shape Tile,-1,1,0,0
-17,L-Shape Tile,-1,1,0,0
-18,L-Shape Tile,-1,1,0,0
-19,L-Shape Tile,-1,1,0,0
-20,L-Shape Tile,-1,1,0,0
-21,L-Shape Tile,-1,1,0,0
-22,L-Shape Tile,-1,1,0,0
-23,T-Shape Tile,-1,1,0,0
-24,T-Shape Tile,-1,1,0,0
-25,T-Shape Tile,-1,1,0,0
-26,T-Shape Tile,-1,1,0,0
-27,T-Shape Tile,-1,1,0,0
-28,T-Shape Tile,-1,1,0,0
-29,T-Shape Tile,-1,1,0,0
-30,T-Shape Tile,-1,1,0,0
-31,CrossRoad,-1,1,1,-1
-32,CrossRoad,-1,1,1,-1
-33,CrossRoad,-1,1,1,-1
-34,CrossRoad,-1,1,1,-1
-35,CrossRoad,-1,1,1,-1
-36,CrossRoad,-1,1,1,-1
-37,CrossRoad,-1,1,1,-1
-38,CrossRoad,-1,1,1,-1
-39,CrossRoad,-1,1,1,-1
-40,CrossRoad,-1,1,1,-1
-41,CrossRoad,-1,1,1,-1
-42,CrossRoad,-1,1,1,-1
+1,Straight Corridor,1,0,1,0
+2,Straight Corridor,1,0,1,0
+3,Straight Corridor,1,0,1,0
+4,Straight Corridor,1,0,1,0
+5,Straight Corridor,1,0,1,0
+6,Straight Corridor,1,0,1,0
+7,Straight Corridor,1,0,1,0
+8,Straight Corridor,1,0,1,0
+9,Straight Corridor,1,0,1,0
+10,Straight Corridor,1,0,1,0
+11,Straight Corridor,1,0,1,0
+12,Straight Corridor,1,0,1,0
+13,Straight Corridor,1,0,1,0
+14,Straight Corridor,1,0,1,0
+15,L-Shape Tile,1,1,0,0
+16,L-Shape Tile,1,1,0,0
+17,L-Shape Tile,1,1,0,0
+18,L-Shape Tile,1,1,0,0
+19,L-Shape Tile,1,1,0,0
+20,L-Shape Tile,1,1,0,0
+21,L-Shape Tile,1,1,0,0
+22,L-Shape Tile,1,1,0,0
+23,T-Shape Tile,1,1,0,0
+24,T-Shape Tile,1,1,0,0
+25,T-Shape Tile,1,1,0,0
+26,T-Shape Tile,1,1,0,0
+27,T-Shape Tile,1,1,0,0
+28,T-Shape Tile,1,1,0,0
+29,T-Shape Tile,1,1,0,0
+30,T-Shape Tile,1,1,0,0
+31,CrossRoad,1,1,1,1
+32,CrossRoad,1,1,1,1
+33,CrossRoad,1,1,1,1
+34,CrossRoad,1,1,1,1
+35,CrossRoad,1,1,1,1
+36,CrossRoad,1,1,1,1
+37,CrossRoad,1,1,1,1
+38,CrossRoad,1,1,1,1
+39,CrossRoad,1,1,1,1
+40,CrossRoad,1,1,1,1
+41,CrossRoad,1,1,1,1
+42,CrossRoad,1,1,1,1
 43,Dead End,0,0,1,0
 44,Dead End,0,0,1,0
 45,Dead End,0,0,1,0

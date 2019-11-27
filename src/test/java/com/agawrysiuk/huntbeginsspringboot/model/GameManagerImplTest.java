@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameManagerImplTest {
 
     @Test
-    void loadTiles() throws IOException {
+    void loadTiles_LoadsTilesToDatabase() throws IOException {
         GameManager gameManager = new GameManagerImpl();
         assertNotEquals(0,gameManager.loadTiles().getTiles().size());
     }

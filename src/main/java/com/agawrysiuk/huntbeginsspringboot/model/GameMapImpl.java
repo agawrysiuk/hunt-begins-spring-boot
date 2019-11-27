@@ -10,6 +10,7 @@ import java.util.List;
 public class GameMapImpl implements GameMap {
     @Getter
     private FloorTile[][] gameMap;
+    @Getter
     private List<FloorTile> fillerList;
     private boolean finished;
 
@@ -42,6 +43,7 @@ public class GameMapImpl implements GameMap {
             floorTile.setCoordinates(x, y);
 
             addFillerTiles(floorTile.getExits());
+            return true;
         } else {
             log.info("Trying to find a filler tile.");
             if (fillerList.size() == 0) {
@@ -50,19 +52,25 @@ public class GameMapImpl implements GameMap {
             }
             FloorTile fillerTale = fillerList.get(0);
             log.info("Filler tile found. fillerTale = {}", fillerTale);
+            for (int i = 0; i < 3; i++) {
+                //todo here we add our tile on top of filler if it has the same exit
+                //todo else, we rotate and try it again
+                //todo if it fits, we check the rules, add it and return true
+                //todo if it doesn't end after three tries, we return false;
+            }
+            return false;
             //here we need to put a regular tile instead
             //but it needs to have an exit in the same place the fillerTale has
         }
-        return true;
     }
 
-    private void addFillerTiles(int exits[]) {
+    private void addFillerTiles(Exit[] exits) {
         for (int i = 0; i < 4; i++) {
             //if there is an exit option, we add a filler tile
             //which needs to be replaced with an actual tile in the future
-            if (exits[i] != 0) {
+            if (exits[i] != null) {
                 FloorTile fillerTale = new FloorTileImpl(-1, "filler");
-                fillerTale.setOneExit(i, -exits[i]);
+                fillerTale.setOneExit(i);
                 fillerList.add(fillerTale);
             }
         }
