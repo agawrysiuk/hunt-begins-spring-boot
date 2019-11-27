@@ -1,59 +1,59 @@
-1,Straight Corridor,1010
-2,Straight Corridor,1010
-3,Straight Corridor,1010
-4,Straight Corridor,1010
-5,Straight Corridor,1010
-6,Straight Corridor,1010
-7,Straight Corridor,1010
-8,Straight Corridor,1010
-9,Straight Corridor,1010
-10,Straight Corridor,1010
-11,Straight Corridor,1010
-12,Straight Corridor,1010
-13,Straight Corridor,1010
-14,Straight Corridor,1010
-15,L-Shape Tile,1100
-16,L-Shape Tile,1100
-17,L-Shape Tile,1100
-18,L-Shape Tile,1100
-19,L-Shape Tile,1100
-20,L-Shape Tile,1100
-21,L-Shape Tile,1100
-22,L-Shape Tile,1100
-23,T-Shape Tile,1100
-24,T-Shape Tile,1100
-25,T-Shape Tile,1100
-26,T-Shape Tile,1100
-27,T-Shape Tile,1100
-28,T-Shape Tile,1100
-29,T-Shape Tile,1100
-30,T-Shape Tile,1100
-31,CrossRoad,1111
-32,CrossRoad,1111
-33,CrossRoad,1111
-34,CrossRoad,1111
-35,CrossRoad,1111
-36,CrossRoad,1111
-37,CrossRoad,1111
-38,CrossRoad,1111
-39,CrossRoad,1111
-40,CrossRoad,1111
-41,CrossRoad,1111
-42,CrossRoad,1111
-43,Dead End,0010
-44,Dead End,0010
-45,Dead End,0010
-46,Dead End,0010
-47,Dead End,0010
-48,Dead End,0010
-49,Dead End,0010
-50,Dead End,0010
-51,Dead End,0010
-52,Dead End,0010
-53,Dead End,0010
-54,Dead End,0010
-55,Escape Pod / Laboratory,0010
-56,Armoury,0010
-57,Bridge,0010
-58,Hibernation Room,0010
-59,Engine Room,0010
+1,Straight Corridor,-1,0,1,0
+2,Straight Corridor,-1,0,1,0
+3,Straight Corridor,-1,0,1,0
+4,Straight Corridor,-1,0,1,0
+5,Straight Corridor,-1,0,1,0
+6,Straight Corridor,-1,0,1,0
+7,Straight Corridor,-1,0,1,0
+8,Straight Corridor,-1,0,1,0
+9,Straight Corridor,-1,0,1,0
+10,Straight Corridor,-1,0,1,0
+11,Straight Corridor,-1,0,1,0
+12,Straight Corridor,-1,0,1,0
+13,Straight Corridor,-1,0,1,0
+14,Straight Corridor,-1,0,1,0
+15,L-Shape Tile,-1,1,0,0
+16,L-Shape Tile,-1,1,0,0
+17,L-Shape Tile,-1,1,0,0
+18,L-Shape Tile,-1,1,0,0
+19,L-Shape Tile,-1,1,0,0
+20,L-Shape Tile,-1,1,0,0
+21,L-Shape Tile,-1,1,0,0
+22,L-Shape Tile,-1,1,0,0
+23,T-Shape Tile,-1,1,0,0
+24,T-Shape Tile,-1,1,0,0
+25,T-Shape Tile,-1,1,0,0
+26,T-Shape Tile,-1,1,0,0
+27,T-Shape Tile,-1,1,0,0
+28,T-Shape Tile,-1,1,0,0
+29,T-Shape Tile,-1,1,0,0
+30,T-Shape Tile,-1,1,0,0
+31,CrossRoad,-1,1,1,-1
+32,CrossRoad,-1,1,1,-1
+33,CrossRoad,-1,1,1,-1
+34,CrossRoad,-1,1,1,-1
+35,CrossRoad,-1,1,1,-1
+36,CrossRoad,-1,1,1,-1
+37,CrossRoad,-1,1,1,-1
+38,CrossRoad,-1,1,1,-1
+39,CrossRoad,-1,1,1,-1
+40,CrossRoad,-1,1,1,-1
+41,CrossRoad,-1,1,1,-1
+42,CrossRoad,-1,1,1,-1
+43,Dead End,0,0,1,0
+44,Dead End,0,0,1,0
+45,Dead End,0,0,1,0
+46,Dead End,0,0,1,0
+47,Dead End,0,0,1,0
+48,Dead End,0,0,1,0
+49,Dead End,0,0,1,0
+50,Dead End,0,0,1,0
+51,Dead End,0,0,1,0
+52,Dead End,0,0,1,0
+53,Dead End,0,0,1,0
+54,Dead End,0,0,1,0
+55,Escape Pod / Laboratory,0,0,1,0
+56,Armoury,0,0,1,0
+57,Bridge,0,0,1,0
+58,Hibernation Room,0,0,1,0
+59,Engine Room,0,0,1,0

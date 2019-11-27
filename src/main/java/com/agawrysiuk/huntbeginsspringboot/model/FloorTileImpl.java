@@ -30,14 +30,21 @@ public class FloorTileImpl implements FloorTile {
             log.info("Incorrect number of exits: {}", exitsToSet);
             return;
         }
+        for (int i = 0; i < exits.length; i++) {
+            exits[i] = exitsToSet[i];
+        }
     }
 
     @Override
     public void rotate() {
         log.info("Before rotation = {}", Arrays.toString(exits));
         int temp = exits[3];
-        for (int i = 0; i < 3; i++) {
-            exits[i + 1] = exits[i];
+        for (int i = 3; i > 0; i--) {
+            if (i == 3 || i == 1) {
+                exits[i] = -exits[i - 1];
+            } else {
+                exits[i] = exits[i - 1];
+            }
         }
         exits[0] = temp;
         log.info("After rotation = {}", Arrays.toString(exits));
