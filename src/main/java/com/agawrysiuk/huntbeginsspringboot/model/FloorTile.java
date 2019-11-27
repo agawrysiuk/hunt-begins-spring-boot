@@ -6,6 +6,8 @@ public interface FloorTile {
 
     void setExits(int... exits);
 
+    void setOneExit(int position, int exit);
+
     int[] getExits();
 
     String getName();

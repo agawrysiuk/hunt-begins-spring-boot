@@ -38,6 +38,11 @@ public class FloorTileImpl implements FloorTile {
     }
 
     @Override
+    public void setOneExit(int position, int exit) {
+        exits[position] = exit;
+    }
+
+    @Override
     public void setCoordinates(int x, int y) {
         coordinates = new CoordinatesImpl(x, y);
     }

@@ -3,21 +3,20 @@ package com.agawrysiuk.huntbeginsspringboot.model;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class GameMapImpl implements GameMap {
     @Getter
-    private Map<Integer,FloorTile> gameTiles;
-    @Getter
     private FloorTile[][] gameMap;
+    private List<FloorTile> fillerList;
     private boolean finished;
 
     public GameMapImpl() {
-        this.gameTiles = new HashMap<>();
         this.gameMap = new FloorTile[40][40];
         this.finished = false;
+        this.fillerList = new ArrayList<>();
     }
 
     @Override
@@ -29,29 +28,44 @@ public class GameMapImpl implements GameMap {
         //if the tile is one point from the border, we need to place there a dead end
         //
         //0. we start with a unique tale
-        //1. if there is a unique tale, we check where there is an open exit checkForExit()
+        //1. if there is a unique tale, we check where there is a filler tile on the board
         //2. we try to add a tile to this exit
         //3. whether it happens or not, we return true or false;
         //3a. if it's true, we also connect two tales to each other
-        log.info("floorTile = {}",floorTile);
-        if(gameTiles.size()==0) {
+        log.info("floorTile = {}", floorTile);
+        if (fillerList.size() == 0 && !finished) {
             log.info("Adding floorTile as an opening tile.");
-            gameTiles.put(floorTile.getId(), floorTile);
             int x = 0;
             int y = 20;
+
             gameMap[x][y] = floorTile;
-            floorTile.setCoordinates(x,y);
+            floorTile.setCoordinates(x, y);
+
+            addFillerTiles(floorTile.getExits());
         } else {
-            log.info("Trying to find an open tile.");
-            FloorTile openTile = findFirstOpen();
-            if (openTile == null) {
-                log.info("No open tile found. Map is completed.");
+            log.info("Trying to find a filler tile.");
+            if (fillerList.size() == 0) {
+                log.info("No filler tile found. Map is completed.");
                 return false;
             }
-            log.info("Open tile found. openTile = {}",openTile);
-            gameTiles.put(floorTile.getId(), floorTile);
+            FloorTile fillerTale = fillerList.get(0);
+            log.info("Filler tile found. fillerTale = {}", fillerTale);
+            //here we need to put a regular tile instead
+            //but it needs to have an exit in the same place the fillerTale has
         }
         return true;
+    }
+
+    private void addFillerTiles(int exits[]) {
+        for (int i = 0; i < 4; i++) {
+            //if there is an exit option, we add a filler tile
+            //which needs to be replaced with an actual tile in the future
+            if (exits[i] != 0) {
+                FloorTile fillerTale = new FloorTileImpl(-1, "filler");
+                fillerTale.setOneExit(i, -exits[i]);
+                fillerList.add(fillerTale);
+            }
+        }
     }
 
     @Override
@@ -63,27 +77,13 @@ public class GameMapImpl implements GameMap {
 
     @Override
     public boolean isFinished() {
-        if(finished) {
+        if (finished) {
             return true;
         }
         //else check:
         //it's finished when it's valid and
         //tiles don't have open exits
         return false;
-    }
-
-    @Override
-    public FloorTile findFirstOpen() {
-        for (Map.Entry<Integer,FloorTile> tile : gameTiles.entrySet()) {
-            int[] exits = tile.getValue().getExits();
-            for (int i = 0; i < exits.length; i++) {
-                if (exits[i]!=0) {
-                    return tile.getValue();
-                }
-            }
-        }
-        finished = true;
-        return null;
     }
 
     //for testing purposes

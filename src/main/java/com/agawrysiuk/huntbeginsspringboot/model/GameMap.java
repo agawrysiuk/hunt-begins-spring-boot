@@ -1,10 +1,6 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
-import java.util.Map;
-
 public interface GameMap {
-    Map<Integer, FloorTile> getGameTiles();
-
     FloorTile[][] getGameMap();
 
     boolean addFloorTile(FloorTile floorTile);
@@ -12,6 +8,4 @@ public interface GameMap {
     boolean isValid();
 
     boolean isFinished();
-
-    FloorTile findFirstOpen();
 }
