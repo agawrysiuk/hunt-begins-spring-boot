@@ -16,6 +16,8 @@ public class FloorTileImpl implements FloorTile {
     private int[] exits;
     @Getter
     private double rotate;
+    @Getter
+    private Coordinates coordinates;
 
     public FloorTileImpl(int id, String name) {
         this.id = id;
@@ -33,6 +35,11 @@ public class FloorTileImpl implements FloorTile {
         for (int i = 0; i < exits.length; i++) {
             exits[i] = exitsToSet[i];
         }
+    }
+
+    @Override
+    public void setCoordinates(int x, int y) {
+        coordinates = new CoordinatesImpl(x, y);
     }
 
     @Override

@@ -13,4 +13,8 @@ public interface FloorTile {
     void rotate();
 
     double getRotate();
+
+    void setCoordinates(int x, int y);
+
+    Coordinates getCoordinates();
 }

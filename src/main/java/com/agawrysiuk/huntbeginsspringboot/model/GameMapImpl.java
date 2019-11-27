@@ -1,10 +1,12 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class GameMapImpl implements GameMap {
     @Getter
     private Map<Integer,FloorTile> gameTiles;
@@ -31,9 +33,22 @@ public class GameMapImpl implements GameMap {
         //2. we try to add a tile to this exit
         //3. whether it happens or not, we return true or false;
         //3a. if it's true, we also connect two tales to each other
+        log.info("floorTile = {}",floorTile);
         if(gameTiles.size()==0) {
+            log.info("Adding floorTile as an opening tile.");
             gameTiles.put(floorTile.getId(), floorTile);
+            int x = 0;
+            int y = 20;
+            gameMap[x][y] = floorTile;
+            floorTile.setCoordinates(x,y);
         } else {
+            log.info("Trying to find an open tile.");
+            FloorTile openTile = findFirstOpen();
+            if (openTile == null) {
+                log.info("No open tile found. Map is completed.");
+                return false;
+            }
+            log.info("Open tile found. openTile = {}",openTile);
             gameTiles.put(floorTile.getId(), floorTile);
         }
         return true;
@@ -58,7 +73,16 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public FloorTile checkForOpenTile() {
+    public FloorTile findFirstOpen() {
+        for (Map.Entry<Integer,FloorTile> tile : gameTiles.entrySet()) {
+            int[] exits = tile.getValue().getExits();
+            for (int i = 0; i < exits.length; i++) {
+                if (exits[i]!=0) {
+                    return tile.getValue();
+                }
+            }
+        }
+        finished = true;
         return null;
     }
 

@@ -13,5 +13,5 @@ public interface GameMap {
 
     boolean isFinished();
 
-    FloorTile checkForOpenTile();
+    FloorTile findFirstOpen();
 }
