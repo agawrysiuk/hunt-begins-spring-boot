@@ -10,4 +10,6 @@ public interface GameManager {
     GameMap createMap();
 
     Map<Integer,FloorTile> getTiles();
+
+    FloorTile getTile(int id);
 }

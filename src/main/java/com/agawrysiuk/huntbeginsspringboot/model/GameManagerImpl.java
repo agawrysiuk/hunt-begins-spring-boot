@@ -69,7 +69,12 @@ public class GameManagerImpl implements GameManager {
             } else {
                 //we try to add another tile
             }
+            gameMap.printMap();
         }
         return gameMap;
+    }
+
+    public FloorTile getTile(int id) {
+        return tiles.get(id);
     }
 }
