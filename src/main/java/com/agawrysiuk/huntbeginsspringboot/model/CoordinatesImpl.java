@@ -11,4 +11,9 @@ public class CoordinatesImpl implements Coordinates {
         this.x = x;
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "[" + x + "," + y + "]";
+    }
 }
