@@ -13,9 +13,11 @@ public class GameMapImpl implements GameMap {
     @Getter
     private List<FloorTile> fillerList;
     private boolean finished;
+    private final int MAP_WIDTH = 40;
+    private final int MAP_HEIGHT = 40;
 
     public GameMapImpl() {
-        this.gameMap = new FloorTile[40][40];
+        this.gameMap = new FloorTile[MAP_HEIGHT][MAP_WIDTH];
         this.finished = false;
         this.fillerList = new ArrayList<>();
     }
@@ -27,7 +29,7 @@ public class GameMapImpl implements GameMap {
         //2. we try to add a tile to this exit
         //3. whether it happens or not, we return true or false;
         //3a. if it's true, we also connect two tales to each other
-        log.info("addFloorTile() started. newFloorTile = {}", newFloorTile);
+        log.info("addFloorTile() started. newFloorTile = {}", newFloorTile.toString());
         if (fillerList.size() == 0 && !finished) {
             //here is a code for the opening tile
             log.info("Adding floorTile as the opening tile.");
@@ -40,6 +42,8 @@ public class GameMapImpl implements GameMap {
             addFillerTiles(newFloorTile);
             return true;
         } else {
+            //todo add here some check to the boolean field if it's true for a special tile needed
+            //todo if true, we need to wait for this special tile
             //here is the code for the rest of the mapping
             log.info("Trying to find a filler tile.");
             if (fillerList.size() == 0) {
@@ -62,6 +66,7 @@ public class GameMapImpl implements GameMap {
                     int y = filler.getCoordinates().getY();
                     gameMap[x][y] = newFloorTile;
                     newFloorTile.setCoordinates(x, y);
+                    fillerList.remove(0);
                     addFillerTiles(newFloorTile);
                     return true;
                 }
@@ -79,36 +84,70 @@ public class GameMapImpl implements GameMap {
         log.info("isFloorTileValid() started. Checking for the valid tile.");
         if(!newFloorTile.getName().equals("Straight Corridor") && !newFloorTile.getName().equals("Dead End")) {
             //it's a unique tile
-            FloorTile nearbyTile = getNearbyTile(coordinates);
-            if (nearbyTile == null) {
-                log.info("Something went wrong when looking for the nearbyTile!");
-                return false;
-            }
-            if(!nearbyTile.getName().equals("Straight Corridor") && !nearbyTile.getName().equals("Dead End")) {
-                log.info("Two unique tiles next to each other. Not a valid tile.");
-                return false;
-            }
-            //else the nearby tile is not unique and we are good to go
+            if (doUniqueTilesCollide(coordinates)) return false;
         }
         //change-direction tiles can't lead to the existing tile without an open exit
+        //todo if they lead to an open exit, it gets automatically filled?
         if (newFloorTile.getName().equals("L-Shape Tile") || newFloorTile.getName().equals("T-Shape Tile") || newFloorTile.getName().equals("CrossRoad")) {
-            //todo finish this
+            if (doExitsLeadToOtherTiles(newFloorTile, coordinates)) return false;
         }
-        //if they lead to an open exit, it gets automatically filled?
-        //if the tile is one point from the border, we need to place there a dead end
+        //if the tile is one point from the border, we need to place a dead end there
 
+        return true;
+    }
+
+    private boolean doExitsLeadToOtherTiles(FloorTile newFloorTile, Coordinates coordinates) {
+        Exit[] exits = newFloorTile.getExits();
+        //we check every exit
+        for(Exit exit : exits) {
+            if(exit!=null){
+                //if it's not null, we go in the given direction and see if we stumble upon some tile
+                log.info("newFloorTile has an exit = {}",exit);
+                try {
+                    int x = coordinates.getX();
+                    int y = coordinates.getY();
+                    for(;;){
+                        x = x+exit.getX();
+                        y = y+exit.getY();
+                        FloorTile checkedTile = gameMap[x][y];
+                        if(checkedTile != null) {
+                            return true;
+                        }
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    log.info("Reached the end of the map with no tiles on the way.");
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean doUniqueTilesCollide(Coordinates coordinates) {
+        FloorTile nearbyTile = getNearbyTile(coordinates);
+        if (nearbyTile == null) {
+            log.info("Something went wrong when looking for the nearbyTile!");
+            return true;
+        }
+        if(!nearbyTile.getName().equals("Straight Corridor") && !nearbyTile.getName().equals("Dead End")) {
+            log.info("Two unique tiles next to each other. Not a valid tile.");
+            return true;
+        }
+        //else the nearby tile is not unique and we are good to go
         return false;
     }
 
     private FloorTile getNearbyTile(Coordinates coordinates) {
+        log.info("getNearbyTile() started for coordinates = {}",coordinates);
         int x = coordinates.getX();
         int y = coordinates.getY();
 
         for (int i = x - 1; i < x + 3; i++) {
             for (int j = y - 1; j < y + 3; j++) {
-                FloorTile foundTile = gameMap[i][j];
-                if(foundTile!=null && !foundTile.getName().contains("filler")) {
-                    return foundTile;
+                if(i>=0 && j>=0) {
+                    FloorTile foundTile = gameMap[i][j];
+                    if(foundTile!=null && !foundTile.getName().contains("filler")) {
+                        return foundTile;
+                    }
                 }
             }
         }
@@ -169,6 +208,16 @@ public class GameMapImpl implements GameMap {
 
     //for testing purposes
     public void printMap() {
-        // TODO: 2019-11-26 finish printing to console
+        for(int i = 0; i<MAP_HEIGHT;i++) {
+            for(int j = 0; j<MAP_WIDTH; j++) {
+                FloorTile floorTile = gameMap[i][j];
+                if(floorTile==null) {
+                    System.out.print("[  ]");
+                } else {
+                    System.out.print("[" + String.format("%02d", floorTile.getId())+"]");
+                }
+            }
+            System.out.print("\n");
+        }
     }
 }
