@@ -6,17 +6,17 @@ public interface FloorTile {
 
     void setExits(int... exits);
 
-    void setOneExit(int position);
+    FloorTile setOneExit(int position);
 
     Exit[] getExits();
 
     String getName();
 
-    void rotate();
+    FloorTile rotate();
 
     double getRotate();
 
-    void setCoordinates(int x, int y);
+    FloorTile setCoordinates(int x, int y);
 
     Coordinates getCoordinates();
 }

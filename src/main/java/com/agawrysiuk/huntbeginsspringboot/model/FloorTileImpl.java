@@ -40,7 +40,7 @@ public class FloorTileImpl implements FloorTile {
     }
 
     @Override
-    public void setOneExit(int position) {
+    public FloorTile setOneExit(int position) {
         switch (position) {
             case 0:
                 exits[position] = Exit.TOP_EXIT;
@@ -55,15 +55,17 @@ public class FloorTileImpl implements FloorTile {
                 exits[position] = Exit.LEFT_EXIT;
                 break;
         }
+        return this;
     }
 
     @Override
-    public void setCoordinates(int x, int y) {
+    public FloorTile setCoordinates(int x, int y) {
         coordinates = new CoordinatesImpl(x, y);
+        return this;
     }
 
     @Override
-    public void rotate() {
+    public FloorTile rotate() {
         log.info("Before rotation = {}", Arrays.toString(exits));
         Exit temp = exits[3];
         for (int i = 3; i > 0; i--) {
@@ -77,5 +79,6 @@ public class FloorTileImpl implements FloorTile {
         }
         log.info("After rotation = {}", Arrays.toString(exits));
         rotate = (rotate + 90) % 360;
+        return this;
     }
 }

@@ -42,7 +42,7 @@ public class GameMapImpl implements GameMap {
             gameMap[x][y] = floorTile;
             floorTile.setCoordinates(x, y);
 
-            addFillerTiles(floorTile.getExits());
+            addFillerTiles(floorTile);
             return true;
         } else {
             log.info("Trying to find a filler tile.");
@@ -52,25 +52,36 @@ public class GameMapImpl implements GameMap {
             }
             FloorTile fillerTale = fillerList.get(0);
             log.info("Filler tile found. fillerTale = {}", fillerTale);
-            for (int i = 0; i < 3; i++) {
+            int rotated = 0;
+            do {
                 //todo here we add our tile on top of filler if it has the same exit
                 //todo else, we rotate and try it again
                 //todo if it fits, we check the rules, add it and return true
                 //todo if it doesn't end after three tries, we return false;
-            }
+
+                floorTile.rotate();
+                rotated++;
+            } while (rotated < 4);
             return false;
             //here we need to put a regular tile instead
             //but it needs to have an exit in the same place the fillerTale has
         }
     }
 
-    private void addFillerTiles(Exit[] exits) {
+    private void addFillerTiles(FloorTile floorTile) {
+        Exit[] exits = floorTile.getExits();
         for (int i = 0; i < 4; i++) {
             //if there is an exit option, we add a filler tile
             //which needs to be replaced with an actual tile in the future
             if (exits[i] != null) {
-                FloorTile fillerTale = new FloorTileImpl(-1, "filler");
-                fillerTale.setOneExit(i);
+                FloorTile fillerTale =
+                        new FloorTileImpl(-1, "filler")
+                        .setCoordinates(
+                                floorTile.getCoordinates().getX() + exits[i].getX(),
+                                floorTile.getCoordinates().getY() + exits[i].getY())
+                        .setOneExit(i)
+                        .rotate()
+                        .rotate();
                 fillerList.add(fillerTale);
             }
         }
