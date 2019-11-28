@@ -21,23 +21,23 @@ public class GameMapImpl implements GameMap {
     }
 
     @Override
-    public boolean addFloorTile(FloorTile floorTile) {
+    public boolean addFloorTile(FloorTile newFloorTile) {
         //0. we start with a unique tale
         //1. if there is a unique tale, we check where there is a filler tile on the board
         //2. we try to add a tile to this exit
         //3. whether it happens or not, we return true or false;
         //3a. if it's true, we also connect two tales to each other
-        log.info("floorTile = {}", floorTile);
+        log.info("addFloorTile() started. newFloorTile = {}", newFloorTile);
         if (fillerList.size() == 0 && !finished) {
             //here is a code for the opening tile
             log.info("Adding floorTile as the opening tile.");
             int x = 0;
             int y = 20;
 
-            gameMap[x][y] = floorTile;
-            floorTile.setCoordinates(x, y);
+            gameMap[x][y] = newFloorTile;
+            newFloorTile.setCoordinates(x, y);
 
-            addFillerTiles(floorTile);
+            addFillerTiles(newFloorTile);
             return true;
         } else {
             //here is the code for the rest of the mapping
@@ -55,16 +55,17 @@ public class GameMapImpl implements GameMap {
                 //else, we rotate and try it again
                 //if it fits, we check the rules, add it and return true
                 //if it doesn't end after three tries, we return false;
-                if (checkExits(floorTile, filler) && isFloorTileValid(floorTile)) {
+                log.info("Checking for validity. Rotation = {}",rotated*90);
+                if (checkExits(newFloorTile, filler) && isFloorTileValid(newFloorTile,filler.getCoordinates())) {
                     //if an exit matches and it's valid, we add it to the map and exit
                     int x = filler.getCoordinates().getX();
                     int y = filler.getCoordinates().getY();
-                    gameMap[x][y] = floorTile;
-                    floorTile.setCoordinates(x, y);
-                    addFillerTiles(floorTile);
+                    gameMap[x][y] = newFloorTile;
+                    newFloorTile.setCoordinates(x, y);
+                    addFillerTiles(newFloorTile);
                     return true;
                 }
-                floorTile.rotate();
+                newFloorTile.rotate();
                 rotated++;
             } while (rotated < 4);
             //if it doesn't fit after rotating it three times, we exit the method
@@ -72,24 +73,59 @@ public class GameMapImpl implements GameMap {
         }
     }
 
-    private boolean isFloorTileValid(FloorTile floorTile) {
+    private boolean isFloorTileValid(FloorTile newFloorTile, Coordinates coordinates) {
         //RULES:
-        //unique tales can't be next to each other
-        //change-direction tiles can't be next to each other
+        //unique tiles and change-direction tiles can't be next to each other
+        log.info("isFloorTileValid() started. Checking for the valid tile.");
+        if(!newFloorTile.getName().equals("Straight Corridor") && !newFloorTile.getName().equals("Dead End")) {
+            //it's a unique tile
+            FloorTile nearbyTile = getNearbyTile(coordinates);
+            if (nearbyTile == null) {
+                log.info("Something went wrong when looking for the nearbyTile!");
+                return false;
+            }
+            if(!nearbyTile.getName().equals("Straight Corridor") && !nearbyTile.getName().equals("Dead End")) {
+                log.info("Two unique tiles next to each other. Not a valid tile.");
+                return false;
+            }
+            //else the nearby tile is not unique and we are good to go
+        }
         //change-direction tiles can't lead to the existing tile without an open exit
-        //if they lead to an open exit, it gets automatically filled
+        if (newFloorTile.getName().equals("L-Shape Tile") || newFloorTile.getName().equals("T-Shape Tile") || newFloorTile.getName().equals("CrossRoad")) {
+            //todo finish this
+        }
+        //if they lead to an open exit, it gets automatically filled?
         //if the tile is one point from the border, we need to place there a dead end
 
         return false;
     }
 
-    private boolean checkExits(FloorTile floorTile, FloorTile filler) {
+    private FloorTile getNearbyTile(Coordinates coordinates) {
+        int x = coordinates.getX();
+        int y = coordinates.getY();
+
+        for (int i = x - 1; i < x + 3; i++) {
+            for (int j = y - 1; j < y + 3; j++) {
+                FloorTile foundTile = gameMap[i][j];
+                if(foundTile!=null && !foundTile.getName().contains("filler")) {
+                    return foundTile;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private boolean checkExits(FloorTile newFloorTile, FloorTile filler) {
+        log.info("checkExits() started.");
         for (int i = 0; i < 4; i++) {
-            if (floorTile.getExits()[i] != null && filler.getExits()[i] != null) {
+            if (newFloorTile.getExits()[i] != null && filler.getExits()[i] != null) {
                 //there is an exit that will connect to the existing tile
+                log.info("Exits match.");
                 return true;
             }
         }
+        log.info("Exits don't match.");
         //there is no way to connect those tiles
         return false;
     }
