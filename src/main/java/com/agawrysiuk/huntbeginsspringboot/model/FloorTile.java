@@ -21,4 +21,6 @@ public interface FloorTile {
     FloorTile setCoordinates(int x, int y);
 
     Coordinates getCoordinates();
+
+    void goBackToDefault();
 }

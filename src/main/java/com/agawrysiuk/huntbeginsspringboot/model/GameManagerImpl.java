@@ -59,7 +59,13 @@ public class GameManagerImpl implements GameManager {
         //  - no -> go to point 3
         //3. try to add a tile
         Random random = new Random();
+        int i = 0;
         while (!gameMap.isFinished()) {
+            i++;
+            if(i%10000==0) {
+                log.info("Iteration number = {}",i);
+
+            }
 
             FloorTile tileToAdd;
 
@@ -67,16 +73,16 @@ public class GameManagerImpl implements GameManager {
                 tileToAdd = tiles.get(55 + random.nextInt(5));
             } else {
                 tileToAdd = tiles.get(random.nextInt(tiles.size()));
-                log.info("tileToAdd = {}",tileToAdd);
+//                log.info("tileToAdd = {}",tileToAdd);
                 if(tileToAdd==null) {
-                    log.info("We already used that tile. Trying another tile.");
+//                    log.info("We already used that tile. Trying another tile.");
                     continue;
                 } else if(tiles.size()>50){
                     if(tileToAdd.getName().equals("Dead End")) {
-                        log.info("We reached dead end too soon. Trying another tile.");
+//                        log.info("We reached dead end too soon. Trying another tile.");
                         continue;
                     } else if(tileToAdd.getId()>=55) {
-                        log.info("We reached unique tile too soon. Trying another tile.");
+//                        log.info("We reached unique tile too soon. Trying another tile.");
                         continue;
                     }
 
@@ -84,15 +90,18 @@ public class GameManagerImpl implements GameManager {
 
             }
             if (gameMap.addFloorTile(tileToAdd)) { //we try adding this tile
-                log.info("tileToAdd successfully added.");
+//                log.info("tileToAdd successfully added.");
                 tiles.remove(tileToAdd.getId());
             } else {
-                log.info("tileToAdd unsuccessful. Trying again.");
+                tileToAdd.goBackToDefault();
+//                log.info("tileToAdd unsuccessful. Trying again.");
             }
-            gameMap.printMap();
-
+            if(i%1000000==0) {
+                gameMap.printMap();
+            }
         }
         log.info("Map created.");
+        gameMap.printMap();
         return gameMap;
     }
 

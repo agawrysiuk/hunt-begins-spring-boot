@@ -14,6 +14,7 @@ public class FloorTileImpl implements FloorTile {
     private final String name;
     @Getter
     private Exit[] exits;
+    private Exit[] exitsCopy;
     @Getter
     private double rotate;
     @Getter
@@ -37,6 +38,7 @@ public class FloorTileImpl implements FloorTile {
                 exits[i] = Exit.values()[i];
             }
         }
+        this.exitsCopy = Arrays.copyOf(this.exits, exits.length);
     }
 
     @Override
@@ -48,6 +50,11 @@ public class FloorTileImpl implements FloorTile {
             }
         }
         return false;
+    }
+
+    @Override
+    public void goBackToDefault() {
+        this.exits = Arrays.copyOf(this.exitsCopy, exitsCopy.length);
     }
 
     @Override
