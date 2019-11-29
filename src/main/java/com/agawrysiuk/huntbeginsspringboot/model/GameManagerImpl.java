@@ -6,20 +6,17 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 public class GameManagerImpl implements GameManager {
 
     private GameMap gameMap;
     @Getter
-    private Map<Integer, FloorTile> tiles;
+    private List<FloorTile> tiles;
 
     public GameManagerImpl() {
-        this.tiles = new HashMap<>();
+        this.tiles = new ArrayList<>();
     }
 
     /*    14x Straight Corridors    id 1-14
@@ -43,7 +40,7 @@ public class GameManagerImpl implements GameManager {
                     Arrays.stream(new String[]{array[2], array[3], array[4], array[5]})
                             .mapToInt(Integer::parseInt)
                             .toArray());
-            tiles.put(floorTile.getId(), floorTile);
+            tiles.add(floorTile);
         }
         return this;
     }
@@ -62,22 +59,26 @@ public class GameManagerImpl implements GameManager {
         int i = 0;
         while (!gameMap.isFinished()) {
             i++;
-            if(i%10000==0) {
+            if(i%10==0) {
                 log.info("Iteration number = {}",i);
 
             }
 
             FloorTile tileToAdd;
 
+            int tileNumber;
+
             if (gameMap.getFillerList().isEmpty()) {//we need to choose a starting tile if it's an empty map
-                tileToAdd = tiles.get(55 + random.nextInt(5));
+                tileNumber = 54 + random.nextInt(5);
+                tileToAdd = tiles.get(tileNumber);
             } else {
-                tileToAdd = tiles.get(random.nextInt(tiles.size()));
+                tileNumber = random.nextInt(tiles.size()-1);
+                tileToAdd = tiles.get(tileNumber);
 //                log.info("tileToAdd = {}",tileToAdd);
                 if(tileToAdd==null) {
 //                    log.info("We already used that tile. Trying another tile.");
                     continue;
-                } else if(tiles.size()>45){
+                } else if(tiles.size()>35){
                     if(tileToAdd.getName().equals("Dead End")) {
 //                        log.info("We reached dead end too soon. Trying another tile.");
                         continue;
@@ -90,13 +91,16 @@ public class GameManagerImpl implements GameManager {
 
             }
             if (gameMap.addFloorTile(tileToAdd)) { //we try adding this tile
-                log.info("tileToAdd number {} successfully added.",tileToAdd.getId());
-                tiles.remove(tileToAdd.getId());
+//                log.info("tileToAdd number {} successfully added.",tileToAdd.getId());
+                tiles.remove(tileNumber);
             } else {
                 tileToAdd.goBackToDefault();
-                log.info("tileToAdd number {} not added. Trying again",tileToAdd.getId());
+//                log.info("tileToAdd number {} not added. Trying again",tileToAdd.getId());
             }
-            if(i%1000000==0) {
+            if(i==500000) {
+                break;
+            }
+            if(i%100==0) {
                 gameMap.printMap();
             }
         }

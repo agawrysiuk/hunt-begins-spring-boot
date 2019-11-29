@@ -1,6 +1,7 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
@@ -16,6 +17,7 @@ public class FloorTileImpl implements FloorTile {
     private Exit[] exits;
     private Exit[] exitsCopy;
     @Getter
+    @Setter
     private double rotate;
     @Getter
     private Coordinates coordinates;

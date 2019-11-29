@@ -86,9 +86,10 @@ public class GameMapImpl implements GameMap {
                     int y = filler.getCoordinates().getY();
                     gameMap[x][y] = newFloorTile;
                     newFloorTile.setCoordinates(x, y);
+                    newFloorTile.setRotate(rotated*90);
                     fillerList.remove(0);
                     addFillerTiles(newFloorTile);
-//                    checkIfOver();
+                    checkIfOver();
                     return true;
                 }
                 newFloorTile.rotate();

@@ -18,6 +18,8 @@ public interface FloorTile {
 
     double getRotate();
 
+    void setRotate(double rotate);
+
     FloorTile setCoordinates(int x, int y);
 
     Coordinates getCoordinates();

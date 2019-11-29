@@ -1,7 +1,7 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 public interface GameManager {
 
@@ -9,7 +9,7 @@ public interface GameManager {
 
     GameMap createMap();
 
-    Map<Integer,FloorTile> getTiles();
+    List<FloorTile> getTiles();
 
     FloorTile getTile(int id);
 }
