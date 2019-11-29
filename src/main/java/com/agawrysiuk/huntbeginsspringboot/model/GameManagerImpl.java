@@ -2,6 +2,7 @@ package com.agawrysiuk.huntbeginsspringboot.model;
 
 import com.agawrysiuk.huntbeginsspringboot.data.Database;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,11 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+@Slf4j
 public class GameManagerImpl implements GameManager {
 
     private GameMap gameMap;
     @Getter
-    private Map<Integer,FloorTile> tiles;
+    private Map<Integer, FloorTile> tiles;
 
     public GameManagerImpl() {
         this.tiles = new HashMap<>();
@@ -38,7 +40,7 @@ public class GameManagerImpl implements GameManager {
             String[] array = currentLine.split(",");
             FloorTile floorTile = new FloorTileImpl(Integer.parseInt(array[0]), array[1]);
             floorTile.setExits(
-                    Arrays.stream(new String[]{array[2],array[3],array[4],array[5]})
+                    Arrays.stream(new String[]{array[2], array[3], array[4], array[5]})
                             .mapToInt(Integer::parseInt)
                             .toArray());
             tiles.put(floorTile.getId(), floorTile);
@@ -56,21 +58,41 @@ public class GameManagerImpl implements GameManager {
         //  - yes -> end it;
         //  - no -> go to point 3
         //3. try to add a tile
-        while(!gameMap.isFinished()) {
-            if(gameMap.getFillerList().isEmpty()) { //we need to choose a starting tile if it's an empty map
-                FloorTile firstTile = tiles.get(55 + new Random().nextInt(5));
-                gameMap.addFloorTile(firstTile);
-                tiles.remove(firstTile.getId());
-                continue;
+        Random random = new Random();
+        while (!gameMap.isFinished()) {
+
+            FloorTile tileToAdd;
+
+            if (gameMap.getFillerList().isEmpty()) {//we need to choose a starting tile if it's an empty map
+                tileToAdd = tiles.get(55 + random.nextInt(5));
+            } else {
+                tileToAdd = tiles.get(random.nextInt(tiles.size()));
+                log.info("tileToAdd = {}",tileToAdd);
+                if(tileToAdd==null) {
+                    log.info("We already used that tile. Trying another tile.");
+                    continue;
+                } else if(tiles.size()>50){
+                    if(tileToAdd.getName().equals("Dead End")) {
+                        log.info("We reached dead end too soon. Trying another tile.");
+                        continue;
+                    } else if(tileToAdd.getId()>=55) {
+                        log.info("We reached unique tile too soon. Trying another tile.");
+                        continue;
+                    }
+
+                }
+
             }
-            FloorTile tileToAdd = tiles.get(new Random().nextInt(tiles.size()));
-            if(gameMap.addFloorTile(tileToAdd)) { //we try adding this tile
+            if (gameMap.addFloorTile(tileToAdd)) { //we try adding this tile
+                log.info("tileToAdd successfully added.");
                 tiles.remove(tileToAdd.getId());
             } else {
-                //we try to add another tile
+                log.info("tileToAdd unsuccessful. Trying again.");
             }
             gameMap.printMap();
+
         }
+        log.info("Map created.");
         return gameMap;
     }
 

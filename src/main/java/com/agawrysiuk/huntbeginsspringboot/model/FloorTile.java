@@ -10,6 +10,8 @@ public interface FloorTile {
 
     Exit[] getExits();
 
+    boolean deleteExit(Exit exit);
+
     String getName();
 
     FloorTile rotate();

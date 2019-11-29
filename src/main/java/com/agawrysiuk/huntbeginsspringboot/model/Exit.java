@@ -1,10 +1,10 @@
 package com.agawrysiuk.huntbeginsspringboot.model;
 
 public enum Exit {
-    TOP_EXIT(0,0,-1),
-    RIGHT_EXIT(1,1,0),
-    BOT_EXIT(2,0,1),
-    LEFT_EXIT(3,-1,0);
+    TOP_EXIT(0,-1,0),
+    RIGHT_EXIT(1,0,1),
+    BOT_EXIT(2,1,0),
+    LEFT_EXIT(3,0,-1);
 
     private int position;
     private int x;

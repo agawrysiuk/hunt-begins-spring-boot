@@ -29,7 +29,7 @@ public class FloorTileImpl implements FloorTile {
     @Override
     public void setExits(int... exitsToSet) {
         if (exitsToSet.length != 4) {
-            log.info("Incorrect number of exits: {}", exitsToSet);
+            log.warn("Incorrect number of exits: {}", exitsToSet);
             return;
         }
         for (int i = 0; i < exits.length; i++) {
@@ -37,6 +37,17 @@ public class FloorTileImpl implements FloorTile {
                 exits[i] = Exit.values()[i];
             }
         }
+    }
+
+    @Override
+    public boolean deleteExit(Exit exit) {
+        for (int i = 0; i < exits.length; i++) {
+            if (exits[i] != null && exits[i].equals(exit)) {
+                exits[i] = null;
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -66,7 +77,7 @@ public class FloorTileImpl implements FloorTile {
 
     @Override
     public FloorTile rotate() {
-        log.info("Before rotation = {}", Arrays.toString(exits));
+//        log.info("Before rotation = {}", Arrays.toString(exits));
         Exit temp = exits[3];
         for (int i = 3; i > 0; i--) {
             exits[i] = exits[i - 1];
@@ -77,8 +88,19 @@ public class FloorTileImpl implements FloorTile {
                 setOneExit(i);
             }
         }
-        log.info("After rotation = {}", Arrays.toString(exits));
+//        log.info("After rotation = {}", Arrays.toString(exits));
         rotate = (rotate + 90) % 360;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "FloorTileImpl{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", exits=" + Arrays.toString(exits) +
+                ", rotate=" + rotate +
+                ", coordinates=" + coordinates +
+                '}';
     }
 }
