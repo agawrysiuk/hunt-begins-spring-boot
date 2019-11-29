@@ -67,8 +67,10 @@
 31,CrossRoad,1,1,1,1
 31,CrossRoad,1,1,1,1
 31,CrossRoad,1,1,1,1
-31,CrossRoad,1,1,1,1
-31,CrossRoad,1,1,1,1
+43,Dead End,0,0,1,0
+43,Dead End,0,0,0,1
+43,Dead End,1,0,0,0
+43,Dead End,0,1,0,0
 43,Dead End,0,0,1,0
 43,Dead End,0,0,0,1
 43,Dead End,1,0,0,0

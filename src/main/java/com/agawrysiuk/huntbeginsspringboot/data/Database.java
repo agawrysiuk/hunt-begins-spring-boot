@@ -23,6 +23,6 @@ public final class Database {
                 new BufferedReader(
                 new FileReader(
                 ResourceUtils.getFile(
-                        SMALL_TILES_PATH)));
+                        TILES_PATH)));
     }
 }

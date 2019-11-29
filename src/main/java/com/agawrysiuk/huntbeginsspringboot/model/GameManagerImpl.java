@@ -97,7 +97,7 @@ public class GameManagerImpl implements GameManager {
                 tileToAdd.goBackToDefault();
 //                log.info("tileToAdd number {} not added. Trying again",tileToAdd.getId());
             }
-            if(i==500000) {
+            if(i==100000) {
                 break;
             }
             if(i%100==0) {
