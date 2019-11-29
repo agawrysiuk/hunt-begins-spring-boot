@@ -8,6 +8,9 @@ import java.io.FileReader;
 
 public final class Database {
 
+    private static final String TILES_PATH = "classpath:static/game/tiles.txt";
+    private static final String SMALL_TILES_PATH = "classpath:static/game/small_tiles.txt";
+
     private Database() {
     }
 
@@ -20,6 +23,6 @@ public final class Database {
                 new BufferedReader(
                 new FileReader(
                 ResourceUtils.getFile(
-                "classpath:static/game/tiles.txt")));
+                        SMALL_TILES_PATH)));
     }
 }
