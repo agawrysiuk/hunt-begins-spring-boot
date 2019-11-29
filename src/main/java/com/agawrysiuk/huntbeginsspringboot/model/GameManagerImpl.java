@@ -77,7 +77,7 @@ public class GameManagerImpl implements GameManager {
                 if(tileToAdd==null) {
 //                    log.info("We already used that tile. Trying another tile.");
                     continue;
-                } else if(tiles.size()>50){
+                } else if(tiles.size()>45){
                     if(tileToAdd.getName().equals("Dead End")) {
 //                        log.info("We reached dead end too soon. Trying another tile.");
                         continue;
@@ -90,11 +90,11 @@ public class GameManagerImpl implements GameManager {
 
             }
             if (gameMap.addFloorTile(tileToAdd)) { //we try adding this tile
-//                log.info("tileToAdd successfully added.");
+                log.info("tileToAdd number {} successfully added.",tileToAdd.getId());
                 tiles.remove(tileToAdd.getId());
             } else {
                 tileToAdd.goBackToDefault();
-//                log.info("tileToAdd unsuccessful. Trying again.");
+                log.info("tileToAdd number {} not added. Trying again",tileToAdd.getId());
             }
             if(i%1000000==0) {
                 gameMap.printMap();

@@ -70,12 +70,15 @@ public class GameMapImpl implements GameMap {
 //                    log.info("exitToDelete = {}, not null. Checking other.",exitToDelete);
                     if(!newFloorTile.getName().equals("Straight Corridor") && !newFloorTile.getName().equals("Dead End")) {
                         //it's a unique tile
-                        if (doUniqueTilesCollide(filler.getCoordinates(),exitToDelete)) return false;
+                        if (doUniqueTilesCollide(filler.getCoordinates(),exitToDelete)) {
+                            return false;
+                        }
                     }
                     newFloorTile.deleteExit(exitToDelete);
                     if (newFloorTile.getName().equals("L-Shape Tile") || newFloorTile.getName().equals("T-Shape Tile") || newFloorTile.getName().equals("CrossRoad")) {
                          //we need to delete an exit that connect to the other tile first
                         if (doExitsLeadToOtherTiles(newFloorTile, filler.getCoordinates())) {
+                            newFloorTile.setOneExit(exitToDelete.getPosition());
                             return false;
                         }
                     }
@@ -85,7 +88,7 @@ public class GameMapImpl implements GameMap {
                     newFloorTile.setCoordinates(x, y);
                     fillerList.remove(0);
                     addFillerTiles(newFloorTile);
-                    checkIfOver();
+//                    checkIfOver();
                     return true;
                 }
                 newFloorTile.rotate();
@@ -144,26 +147,6 @@ public class GameMapImpl implements GameMap {
         }
         //else the nearby tile is not unique and we are good to go
         return false;
-    }
-
-    private FloorTile getNearbyTile(Coordinates coordinates) {
-        log.info("getNearbyTile() started for coordinates = {}",coordinates);
-        int x = coordinates.getX();
-        int y = coordinates.getY();
-
-        for (int i = x - 1; i < x + 3; i++) {
-            for (int j = y - 1; j < y + 3; j++) {
-                if(i>=0 && j>=0) {
-                    FloorTile foundTile = gameMap[i][j];
-                    if(foundTile!=null && !foundTile.getName().contains("filler")) {
-                        log.info("Found tile at ["+i+","+j+"]");
-                        return foundTile;
-                    }
-                }
-            }
-        }
-
-        return null;
     }
 
     private Exit checkExits(FloorTile newFloorTile, FloorTile filler) {
