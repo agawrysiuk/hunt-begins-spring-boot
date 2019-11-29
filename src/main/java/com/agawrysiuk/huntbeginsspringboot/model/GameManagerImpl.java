@@ -69,7 +69,7 @@ public class GameManagerImpl implements GameManager {
             int tileNumber;
 
             if (gameMap.getFillerList().isEmpty()) {//we need to choose a starting tile if it's an empty map
-                tileNumber = 54 + random.nextInt(5);
+                tileNumber = tiles.size() - 1 - random.nextInt(5);
                 tileToAdd = tiles.get(tileNumber);
             } else {
                 tileNumber = random.nextInt(tiles.size()-1);
