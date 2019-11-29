@@ -81,7 +81,7 @@
 43,Dead End,0,0,0,1
 43,Dead End,1,0,0,0
 43,Dead End,0,1,0,0
-55,Escape Pod / Laboratory,0,0,1,0
+55,Laboratory,0,0,1,0
 56,Armoury,0,0,1,0
 57,Bridge,0,0,1,0
 58,Hibernation Room,0,0,1,0

@@ -5,6 +5,8 @@ It uses the following tiles: straight corridors, L-tiles, T-tiles, crossroads, d
 
 (Project still in progress.)
 
+Web interface to come.
+
 ### Project statistics
 
 **Work time**: In progress since 25.11.2019
