@@ -16,6 +16,8 @@ public class GameMapImpl implements GameMap {
     private boolean finished;
     private final int MAP_WIDTH = 40;
     private final int MAP_HEIGHT = 40;
+    private final int FIRST_TILE_X = 10;
+    private final int FIRST_TILE_Y = 20;
 
     public GameMapImpl() {
         this.gameMap = new FloorTile[MAP_HEIGHT][MAP_WIDTH];
@@ -39,11 +41,8 @@ public class GameMapImpl implements GameMap {
             }
             //here is a code for the opening tile
             log.info("Adding floorTile as the opening tile.");
-            int x = 0;
-            int y = 20;
-
-            gameMap[x][y] = newFloorTile;
-            newFloorTile.setCoordinates(x, y);
+            gameMap[FIRST_TILE_X][FIRST_TILE_Y] = newFloorTile;
+            newFloorTile.setCoordinates(FIRST_TILE_X, FIRST_TILE_Y);
 
             addFillerTiles(newFloorTile);
             return true;
@@ -132,7 +131,9 @@ public class GameMapImpl implements GameMap {
 
     private boolean doUniqueTilesCollide(Coordinates coordinates,Exit exit) {
         log.info("doUniqueTilesCollide() started.");
-        FloorTile nearbyTile = getNearbyTile(coordinates);
+        int x = coordinates.getX() + exit.getX();
+        int y = coordinates.getY() + exit.getY();
+        FloorTile nearbyTile = gameMap[x][y];
         if (nearbyTile == null) {
             log.info("Something went wrong when looking for the nearbyTile!");
             return true;
