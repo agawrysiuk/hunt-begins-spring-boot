@@ -1,0 +1,4 @@
+<thlogic>
+    <attr sel="#headId" th:fragment="headFragment"/>
+    <attr sel="#linkToCss" th:href="@{/static/css/full.css}"/>
+</thlogic>

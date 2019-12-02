@@ -17,23 +17,27 @@ public class FloorTileImpl implements FloorTile {
     private Exit[] exits;
     private Exit[] exitsCopy;
     @Getter
-    @Setter
     private double rotate;
+    private double rotateCopy;
     @Getter
     private Coordinates coordinates;
+    @Getter
+    @Setter
+    private String imgPath;
 
     public FloorTileImpl(int id, String name) {
         this.id = id;
         this.name = name;
         this.rotate = 0;
         this.exits = new Exit[4];
+        this.rotateCopy = rotate;
     }
 
     @Override
-    public void setExits(int... exitsToSet) {
+    public FloorTile setExits(int... exitsToSet) {
         if (exitsToSet.length != 4) {
             log.warn("Incorrect number of exits: {}", exitsToSet);
-            return;
+            return null;
         }
         for (int i = 0; i < exits.length; i++) {
             if (exitsToSet[i] != 0) {
@@ -41,6 +45,7 @@ public class FloorTileImpl implements FloorTile {
             }
         }
         this.exitsCopy = Arrays.copyOf(this.exits, exits.length);
+        return this;
     }
 
     @Override
@@ -57,6 +62,7 @@ public class FloorTileImpl implements FloorTile {
     @Override
     public void goBackToDefault() {
         this.exits = Arrays.copyOf(this.exitsCopy, exitsCopy.length);
+        this.rotate = rotateCopy;
     }
 
     @Override
@@ -99,6 +105,13 @@ public class FloorTileImpl implements FloorTile {
         }
 //        log.info("After rotation = {}", Arrays.toString(exits));
         rotate = (rotate + 90) % 360;
+        return this;
+    }
+
+    @Override
+    public FloorTile setRotate(double rotate) {
+        this.rotate = rotate;
+        this.rotateCopy = rotate;
         return this;
     }
 

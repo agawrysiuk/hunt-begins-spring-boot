@@ -3,12 +3,14 @@ package com.agawrysiuk.huntbeginsspringboot.model;
 import com.agawrysiuk.huntbeginsspringboot.data.Database;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
 @Slf4j
+@Component
 public class GameManagerImpl implements GameManager {
 
     private GameMap gameMap;
@@ -31,15 +33,18 @@ public class GameManagerImpl implements GameManager {
       12  Door Tiles*/
     @Override
     public GameManager loadTiles() throws IOException {
+        tiles.clear();
         BufferedReader br = Database.getDatabase().getData();
         String currentLine;
         while ((currentLine = br.readLine()) != null) {
             String[] array = currentLine.split(",");
-            FloorTile floorTile = new FloorTileImpl(Integer.parseInt(array[0]), array[1]);
-            floorTile.setExits(
-                    Arrays.stream(new String[]{array[2], array[3], array[4], array[5]})
+            FloorTile floorTile =
+                    new FloorTileImpl(Integer.parseInt(array[0]), array[1])
+                    .setExits(Arrays
+                            .stream(new String[]{array[2], array[3], array[4], array[5]})
                             .mapToInt(Integer::parseInt)
-                            .toArray());
+                            .toArray())
+                    .setRotate(Double.parseDouble(array[6]));
             tiles.add(floorTile);
         }
         return this;
@@ -97,12 +102,12 @@ public class GameManagerImpl implements GameManager {
                 tileToAdd.goBackToDefault();
 //                log.info("tileToAdd number {} not added. Trying again",tileToAdd.getId());
             }
-            if(i==100000) {
+            if(i==1000) { //we don't want it to take too long, so we break it early; if it doesn't finish by 1000 iterations, it won't at all
                 break;
             }
-            if(i%100==0) {
-                gameMap.printMap();
-            }
+//            if(i%100==0) {
+//                gameMap.printMap();
+//            }
         }
         log.info("Map created.");
         gameMap.printMap();

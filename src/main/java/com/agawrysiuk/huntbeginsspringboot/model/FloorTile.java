@@ -4,7 +4,7 @@ public interface FloorTile {
 
     int getId();
 
-    void setExits(int... exits);
+    FloorTile setExits(int... exits);
 
     FloorTile setOneExit(int position);
 
@@ -18,11 +18,15 @@ public interface FloorTile {
 
     double getRotate();
 
-    void setRotate(double rotate);
+    FloorTile setRotate(double rotate);
 
     FloorTile setCoordinates(int x, int y);
 
     Coordinates getCoordinates();
 
     void goBackToDefault();
+
+    void setImgPath(String imgPath);
+
+    String getImgPath();
 }
