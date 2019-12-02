@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
-*:focus {
-    outline: none;
-}
-
 body {
     height: 100%;
     margin: 0;
@@ -15,7 +11,7 @@ body {
     font-weight: 300;
 }
 
-header {
+footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -26,108 +22,8 @@ header {
     text-align: center;
 }
 
-table, th, td {
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    padding: 5px;
-    border-spacing: 50px 0;
-}
-
 div.centerContainer {
     text-align: center;
-}
-
-table.slotsTable {
-    border-collapse: collapse;
-    border-style: hidden;
-}
-
-table td.slotsColumn {
-    padding: 30px;
-    border: 1px solid black;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover:not(.active) {
-    background-color: #1e2127;
-}
-
-.active {
-    background-color: #4CAF50;
-}
-
-#login-box {
-    position: relative;
-    margin: 5% auto;
-    width: 600px;
-    height: auto;
-    background: #FFF;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.registrationForm {
-    /*position: absolute;*/
-    overflow: visible;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 500px;
-    height: auto;
-}
-
-h1 {
-    margin: 0 0 20px 0;
-    font-weight: 300;
-    font-size: 28px;
-}
-
-input[type="text"],
-input[type="date"],
-input[type="email"],
-input[type="password"] {
-    display: block;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-    padding: 4px;
-    width: 220px;
-    height: 32px;
-    border: none;
-    border-bottom: 1px solid #AAA;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    transition: 0.2s ease;
-}
-
-input[type="text"]:focus,
-input[type="date"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-bottom: 2px solid #16a085;
-    color: #16a085;
-    transition: 0.2s ease;
 }
 
 input[type="submit"] {
@@ -158,92 +54,6 @@ input[type="submit"]:active {
     opacity: 1;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
     transition: 0.1s ease;
-}
-
-#error-box {
-    position: relative;
-    margin: 5% auto;
-    width: 600px;
-    height: 550px;
-    background: #FFF;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.errorShow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 40px;
-    width: 500px;
-    height: 550px;
-}
-
-#account-page {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    margin: 5% auto;
-    width: auto;
-    height: auto;
-    background: #FFF;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-#account-page2 {
-    position: absolute;
-    top: 50px;
-    left: 750px;
-    margin: 5% auto;
-    width: auto;
-    height: auto;
-    background: #FFF;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.account-box {
-    /*position: absolute;*/
-    overflow: visible;
-    float: left;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 40px;
-    width: auto;
-    height: auto;
-}
-
-.account-box2 {
-    /*position: absolute;*/
-    overflow: visible;
-    float: left;
-    top: 0;
-    left: 0;
-    box-sizing: border-box;
-    padding: 70px;
-    width: auto;
-    height: auto;
-}
-
-table.tableAccount {
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-    border-spacing: 50px 0;
-}
-
-td.accountNormal {
-    width: 150px;
-    text-align: left;
-}
-
-td.accountBold {
-    width: auto;
-    text-align: left;
-    font-weight: bold;
 }
 
 button.redirect {
