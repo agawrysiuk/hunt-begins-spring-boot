@@ -1,7 +1,7 @@
 package com.agawrysiuk.huntbeginsspringboot.service;
 
-import com.agawrysiuk.huntbeginsspringboot.model.GameMap;
+import com.agawrysiuk.huntbeginsspringboot.data.GameMapDto;
 
 public interface GameService {
-    GameMap getMap();
+    GameMapDto getMap();
 }

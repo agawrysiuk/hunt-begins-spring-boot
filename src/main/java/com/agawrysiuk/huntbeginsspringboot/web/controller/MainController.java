@@ -1,6 +1,6 @@
 package com.agawrysiuk.huntbeginsspringboot.web.controller;
 
-import com.agawrysiuk.huntbeginsspringboot.model.GameMap;
+import com.agawrysiuk.huntbeginsspringboot.data.GameMapDto;
 import com.agawrysiuk.huntbeginsspringboot.service.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +23,9 @@ public class MainController {
 
     @RequestMapping(value = "/", params = "create", method = RequestMethod.POST)
     public String getMap(Model model) {
-        GameMap gameMap = gameService.getMap();
-        if (gameMap != null) {
-            model.addAttribute("map",gameMap);
+        GameMapDto map = gameService.getMap();
+        if (map != null) {
+            model.addAttribute("map",map);
             return "map";
         } else {
             model.addAttribute("message", "Something went wrong while creating a map.");

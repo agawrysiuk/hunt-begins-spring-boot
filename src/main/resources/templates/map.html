@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head id="headId">
 </head>
 <body>
 <div align="center">
     <p>Map goes here.</p>
+    <table>
+        <tr th:each="rowMap : ${map.gameListMap}">
+            <td th:each="columnMap: ${rowMap}">
+                <p th:if="${columnMap==null}"><span>&nbsp;</span></p>
+                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>
+            </td>
+        </tr>
+    </table>
 </div>
-<footer id="footerId"></footer>
+<!--<footer id="footerId"></footer>-->
 </body>
 </html>

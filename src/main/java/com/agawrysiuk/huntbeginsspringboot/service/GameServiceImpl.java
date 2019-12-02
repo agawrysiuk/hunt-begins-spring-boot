@@ -1,8 +1,8 @@
 package com.agawrysiuk.huntbeginsspringboot.service;
 
+import com.agawrysiuk.huntbeginsspringboot.data.GameMapDto;
 import com.agawrysiuk.huntbeginsspringboot.model.FloorTile;
 import com.agawrysiuk.huntbeginsspringboot.model.GameManager;
-import com.agawrysiuk.huntbeginsspringboot.model.GameMap;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,13 +17,13 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameMap getMap() {
+    public GameMapDto getMap() {
         try {
             gameManager.loadTiles();
             for (FloorTile floorTile : gameManager.getTiles()) {
                 floorTile.setImgPath("/tiles/"+floorTile.getName()+".png");
             }
-            return gameManager.createMap();
+            return new GameMapDto(gameManager.createMap());
         } catch (IOException e) {
             return null;
         }
