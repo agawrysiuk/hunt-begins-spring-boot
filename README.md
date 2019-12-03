@@ -1,11 +1,9 @@
 # hunt-begins-spring-boot
 A project to create random maps for your favourite board games or PC custom maps.
 
-It uses the following tiles: straight corridors, L-tiles, T-tiles, crossroads, dead ends and unique rooms.
+Here, I used an AvP: Hunt Begins' tiles to present the map.
 
-(Project still in progress.)
-
-Web interface to come.
+You can check out a short presentation about this project: https://youtu.be/LqWnQ8j1vCw
 
 ### Project statistics
 
@@ -15,5 +13,12 @@ Web interface to come.
 
 **External libraries used**:
 - Spring Boot
+- MongoDB
+- Thymeleaf
 - Lombok
-- ...
+
+**Random map generator**
+
+**Can be used to any board game**
+
+**It displays the map and can save it to the database**
