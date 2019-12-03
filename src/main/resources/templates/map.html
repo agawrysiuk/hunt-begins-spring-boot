@@ -6,9 +6,9 @@
 <div align="center">
     <p>Here is your randomly generated map:</p>
     <table>
-        <tr th:each="rowMap : ${map.gameListMap}" style="margin-top: 0; padding-top: 0;">
+        <tr th:each="rowMap : ${map.gameListMap}">
             <td th:each="columnMap: ${rowMap}">
-                <p th:if="${columnMap==null}"><span></span></p>
+                <span th:if="${columnMap==null}"></span>
 <!--                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>-->
                 <span th:if="${columnMap!=null}">
                     <img th:src="${columnMap.imgPath}"
