@@ -1,4 +1,8 @@
 <thlogic>
     <attr sel="#headId" th:replace="~{fragments/head :: headFragment}"/>
     <attr sel="#footerId" th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#printingId" th:replace="~{fragments/printing :: printingFragment}"/>
+    <attr sel="#mapNumber" th:text="${map.id}"/>
+    <attr sel="#goPreviousStyle" th:style="${booleanLeft? 'pointer-events: none;' : ''}"/>
+    <attr sel="#goForwardStyle" th:style="${booleanRight? 'pointer-events: none;' : ''}"/>
 </thlogic>

@@ -1,47 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
 <div align="center">
     <table>
         <tr>
-            <td colspan="3" style="text-align: center;">
-                <p>Map number: <span th:text="${map.id}"></span></p>
+            <td colspan="3">
+                <p>Map number: <span id="mapNumber"></span></p>
             </td>
         </tr>
         <tr>
             <td style="text-align: center;">
                 <form action="" method="post">
                     <input type="hidden" name="left" value="left"/>
-                    <input value="Previous" type="submit" th:style="${booleanLeft? 'pointer-events: none;' : ''}"/>
+                    <input value="Previous" type="submit" id="goPreviousStyle"/>
                 </form>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <form action="" method="post">
                     <input type="hidden" name="main" value="main"/>
                     <input value="Main page" type="submit"/>
                 </form>
             </td>
-            <td style="text-align: center;">
+            <td>
                 <form action="" method="post">
                     <input type="hidden" name="right" value="right"/>
-                    <input value="Next" type="submit" th:style="${booleanRight? 'pointer-events: none;' : ''}"/>
+                    <input value="Next" type="submit" id="goForwardStyle"/>
                 </form>
             </td>
         </tr>
     </table>
-    <table>
-        <tr th:each="rowMap : ${map.gameListMap}">
-            <td th:each="columnMap: ${rowMap}">
-                <span th:if="${columnMap==null}"></span>
-                <!--                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>-->
-                <span th:if="${columnMap!=null}">
-                    <img th:src="${columnMap.imgPath}"
-                         th:style="'transform:rotate('+@{${columnMap.rotate}}+'deg);'"/>
-                </span>
-            </td>
-        </tr>
+    <table id ="printingId">
     </table>
 </div>
 <!--<footer id="footerId"></footer>-->

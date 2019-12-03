@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head id="headId">
 </head>
 <body>
@@ -13,6 +13,12 @@
                     <input value="Create again" type="submit"/>
                 </form>
             </td>
+            <td style="text-align: center;">
+                <form action="" method="post">
+                    <input type="hidden" name="main" value="main"/>
+                    <input value="Main page" type="submit"/>
+                </form>
+            </td>
             <td>
                 <form action="" method="post">
                     <input type="hidden" name="save" value="save"/>
@@ -21,17 +27,7 @@
             </td>
         </tr>
     </table>
-    <table>
-        <tr th:each="rowMap : ${map.gameListMap}">
-            <td th:each="columnMap: ${rowMap}">
-                <span th:if="${columnMap==null}"></span>
-<!--                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>-->
-                <span th:if="${columnMap!=null}">
-                    <img th:src="${columnMap.imgPath}"
-                         th:style="'transform:rotate('+@{${columnMap.rotate}}+'deg);'"/>
-                </span>
-            </td>
-        </tr>
+    <table id="printingId">
     </table>
 </div>
 <!--<footer id="footerId"></footer>-->

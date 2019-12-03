@@ -1,3 +1,9 @@
 <thlogic>
     <attr sel="#printingId" th:fragment="printingFragment"/>
+    <attr sel="#rowMapId" th:each="rowMap : ${map.gameListMap}"/>
+    <attr sel="#columnMapId" th:each="columnMap: ${rowMap}"/>
+    <attr sel="#nullSpan" th:if="${columnMap==null}"/>
+    <attr sel="#notNullSpan" th:if="${columnMap!=null}"/>
+    <attr sel="#tileImage" th:src="${columnMap.imgPath}"
+          th:style="'transform:rotate('+@{${columnMap.rotate}}+'deg);'"/>
 </thlogic>
