@@ -1,16 +1,18 @@
-package com.agawrysiuk.huntbeginsspringboot.service;
+package com.agawrysiuk.huntbeginsspringboot.repository;
 
 import com.agawrysiuk.huntbeginsspringboot.model.FloorTile;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document
+@Document(collection="avp")
+@Data
 public class GameMapDto {
-    @Getter
-    @Setter
+
+    @Id
+    private String id;
     private List<List<FloorTile>> gameListMap;
 
     public GameMapDto() {

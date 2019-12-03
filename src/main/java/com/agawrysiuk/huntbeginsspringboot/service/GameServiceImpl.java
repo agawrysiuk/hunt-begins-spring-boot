@@ -3,6 +3,8 @@ package com.agawrysiuk.huntbeginsspringboot.service;
 import com.agawrysiuk.huntbeginsspringboot.model.FloorTile;
 import com.agawrysiuk.huntbeginsspringboot.model.GameManager;
 import com.agawrysiuk.huntbeginsspringboot.model.GameMap;
+import com.agawrysiuk.huntbeginsspringboot.repository.GameMapDto;
+import com.agawrysiuk.huntbeginsspringboot.repository.GameMapRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,9 +16,21 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     private final GameManager gameManager;
+    private final GameMapRepository gameMapRepository;
 
-    public GameServiceImpl(GameManager gameManager) {
+    public GameServiceImpl(GameManager gameManager, GameMapRepository gameMapRepository) {
         this.gameManager = gameManager;
+        this.gameMapRepository = gameMapRepository;
+    }
+
+    @Override
+    public List<GameMapDto> findAll() {
+        return gameMapRepository.findAll();
+    }
+
+    @Override
+    public void addMapToRepository(GameMapDto gameMapDto) {
+        gameMapRepository.save(gameMapDto);
     }
 
     @Override
