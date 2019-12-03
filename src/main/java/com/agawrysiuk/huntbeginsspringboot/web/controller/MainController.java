@@ -1,6 +1,6 @@
 package com.agawrysiuk.huntbeginsspringboot.web.controller;
 
-import com.agawrysiuk.huntbeginsspringboot.data.GameMapDto;
+import com.agawrysiuk.huntbeginsspringboot.service.GameMapDto;
 import com.agawrysiuk.huntbeginsspringboot.service.GameService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

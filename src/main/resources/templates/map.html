@@ -4,12 +4,16 @@
 </head>
 <body>
 <div align="center">
-    <p>Map goes here.</p>
+    <p>Here is your randomly generated map:</p>
     <table>
-        <tr th:each="rowMap : ${map.gameListMap}">
+        <tr th:each="rowMap : ${map.gameListMap}" style="margin-top: 0; padding-top: 0;">
             <td th:each="columnMap: ${rowMap}">
-                <p th:if="${columnMap==null}"><span>&nbsp;</span></p>
-                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>
+                <p th:if="${columnMap==null}"><span></span></p>
+<!--                <p th:if="${columnMap!=null}"><span th:text="${columnMap.name}"></span></p>-->
+                <span th:if="${columnMap!=null}">
+                    <img th:src="${columnMap.imgPath}"
+                         th:style="'transform:rotate('+@{${columnMap.rotate}}+'deg);'"/>
+                </span>
             </td>
         </tr>
     </table>

@@ -1,4 +1,4 @@
-package com.agawrysiuk.huntbeginsspringboot.data;
+package com.agawrysiuk.huntbeginsspringboot.service;
 
 import com.agawrysiuk.huntbeginsspringboot.model.FloorTile;
 import com.agawrysiuk.huntbeginsspringboot.model.GameMap;
